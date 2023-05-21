@@ -78,7 +78,7 @@ function App() {
 
   return (
     <>
-      <h1>Secure Messaging App</h1>
+      <h1>Send your passwords and sensitive data - safely and secure!</h1>
 
       <div id="key-display">
         <h2>Your Key</h2>
