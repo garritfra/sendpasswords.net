@@ -46,11 +46,11 @@ function App() {
     if (friendKey && key) {
       const parsedFriendKey = await openpgp.readKey({ armoredKey: friendKey });
       const encrypted = await openpgp.encrypt({
-        message: await openpgp.createMessage({ text: message.trim() }),
+        message: await openpgp.createMessage({ text: message }),
         encryptionKeys: [parsedFriendKey],
         format: "armored",
       });
-      copyToClipboard(encrypted.toString().trim());
+      copyToClipboard(encrypted.toString());
     }
     setIsMessageCopied(true);
   };
@@ -102,7 +102,7 @@ function App() {
         <textarea
           id="message"
           value={message}
-          onChange={(e) => setMessage(e.target.value.trim())}
+          onChange={(e) => setMessage(e.target.value)}
         ></textarea>
         <button id="encrypt-btn" onClick={onCopyEncryptedMessageClicked}>
           {isMessageCopied ? "Copied to clipboard!" : "Encrypt"}
