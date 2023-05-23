@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as openpgp from "openpgp";
+import "simpledotcss/simple.min.css";
 import "./App.css";
 
 function App() {
@@ -8,12 +9,12 @@ function App() {
   );
   const [isKeyCopied, setIsKeyCopied] = useState(false);
 
-  const [message, setMessage] = useState<string>("");
-  const [isMessageCopied, setIsMessageCopied] = useState(false);
+  const [text, setText] = useState<string>("");
+  const [isTextCopied, setIsTextCopied] = useState(false);
 
   const [friendKey, setFriendKey] = useState<string>("");
 
-  const [decryptMessage, setDecryptMessage] = useState<string>("");
+  const [decryptText, setDecryptText] = useState<string>("");
   const [decryptOutput, setDecryptOutput] = useState<string>("");
 
   useEffect(() => {
@@ -42,33 +43,33 @@ function App() {
     setIsKeyCopied(true);
   };
 
-  const onCopyEncryptedMessageClicked = async () => {
+  const onCopyEncryptedTextClicked = async () => {
     if (friendKey && key) {
       const parsedFriendKey = await openpgp.readKey({ armoredKey: friendKey });
       const encrypted = await openpgp.encrypt({
-        message: await openpgp.createMessage({ text: message }),
+        message: await openpgp.createMessage({ text }),
         encryptionKeys: [parsedFriendKey],
         format: "armored",
       });
       copyToClipboard(encrypted.toString());
     }
-    setIsMessageCopied(true);
+    setIsTextCopied(true);
   };
 
   // TODO: Use proper function type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onDecryptMessageTextChanged = async (e: any) => {
-    setDecryptMessage(e.target.value);
+  const onDecryptTextTextChanged = async (e: any) => {
+    setDecryptText(e.target.value);
     decrypt();
   };
 
   const decrypt = async () => {
-    if (decryptMessage && key) {
+    if (decryptText && key) {
       const parsedPrivateKey = await openpgp.readPrivateKey({
         armoredKey: key.privateKey,
       });
       const decrypted = await openpgp.decrypt({
-        message: await openpgp.readMessage({ armoredMessage: decryptMessage }),
+        message: await openpgp.readMessage({ armoredMessage: decryptText }),
         decryptionKeys: [parsedPrivateKey],
       });
       console.log(decrypted);
@@ -78,49 +79,78 @@ function App() {
 
   return (
     <>
-      <h1>Send your passwords and sensitive data - safely and secure!</h1>
+      <header>
+        <h1>Sendpass.com</h1>
+        <p>Send your passwords and sensitive data - safely and secure!</p>
+      </header>
+      <main>
+        <div id="encryption-section">
+          <h2>Send</h2>
+          <label htmlFor="friend-key">Friend's Key:</label>
+          <textarea
+            id="friend-key"
+            value={friendKey}
+            onChange={(e) => {
+              return setFriendKey(e.target.value);
+            }}
+          ></textarea>
+          <label htmlFor="text">Text:</label>
+          <textarea
+            id="text"
+            value={text}
+            onChange={(e) => setText(e.target.value.trim())}
+          ></textarea>
+          <button id="encrypt-btn" onClick={onCopyEncryptedTextClicked}>
+            {isTextCopied ? "Copied to clipboard!" : "Copy Encrypted Text"}
+          </button>
+        </div>
 
-      <div id="key-display">
-        <h2>Your Key</h2>
-        <textarea id="own-key" value={key?.publicKey} readOnly></textarea>
-        <button id="copy-key-btn" onClick={onCopyKeyButtonClicked}>
-          {isKeyCopied ? "Copied!" : "Copy Key"}
-        </button>
-      </div>
+        <div id="decryption-section">
+          <h2>Receive</h2>
+          <div id="key-display">
+            <button id="copy-key-btn" onClick={onCopyKeyButtonClicked}>
+              {isKeyCopied ? "Copied!" : "Copy Your Key"}
+            </button>
+          </div>
 
-      <div id="encryption-section">
-        <h2>Send Message</h2>
-        <label htmlFor="friend-key">Friend's Key:</label>
-        <textarea
-          id="friend-key"
-          value={friendKey}
-          onChange={(e) => {
-            return setFriendKey(e.target.value);
-          }}
-        ></textarea>
-        <label htmlFor="message">Message:</label>
-        <textarea
-          id="message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        ></textarea>
-        <button id="encrypt-btn" onClick={onCopyEncryptedMessageClicked}>
-          {isMessageCopied ? "Copied to clipboard!" : "Encrypt"}
-        </button>
-      </div>
+          <label htmlFor="encrypted-text">Encrypted Text:</label>
+          <textarea
+            id="encrypted-text"
+            value={decryptText}
+            onChange={onDecryptTextTextChanged}
+            onKeyUp={onDecryptTextTextChanged}
+          ></textarea>
+          <label htmlFor="output">Output:</label>
+          <textarea id="output" readOnly value={decryptOutput}></textarea>
+        </div>
+        <div id="insructions">
+          <h2>Instructions</h2>
+          <ol>
+            <li>Ask your friend for their key</li>
+            <li>Enter the text you want to encrypt</li>
+            <li>
+              Copy the encrypted text. It is safe to share it as plain text!
+            </li>
+          </ol>
+        </div>
+      </main>
+      <footer>
+        <p>
+          Maintained with ♥ by{" "}
+          <a target="blank" href="https://garrit.xyz/">
+            Garrit Franke
+          </a>{" "}
+          for a safer web.
+        </p>
 
-      <div id="decryption-section">
-        <h2>Receive Message</h2>
-        <label htmlFor="encrypted-message">Encrypted Message:</label>
-        <textarea
-          id="encrypted-message"
-          value={decryptMessage}
-          onChange={onDecryptMessageTextChanged}
-          onKeyUp={onDecryptMessageTextChanged}
-        ></textarea>
-        <label htmlFor="output">Output:</label>
-        <textarea id="output" readOnly value={decryptOutput}></textarea>
-      </div>
+        <a href="https://github.com/garritfra/sendpass">Source code</a>
+
+        <p>
+          👻&nbsp;Proud member of{" "}
+          <a href="https://darktheme.club/">darktheme.club</a> 👻
+        </p>
+        <a href="#top">^ TOP ^</a>
+      </footer>
     </>
   );
 }
