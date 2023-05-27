@@ -25,7 +25,7 @@ const Faq = () => {
 
         <p>
           Don't believe me? The source code for this tool is{" "}
-          <a href="https://github.com/garritfra/sendpass">publicly available</a>
+          <a href="https://github.com/garritfra/sendpasswords.net">publicly available</a>
           ! 🙂
         </p>
       </details>

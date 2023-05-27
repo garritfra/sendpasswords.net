@@ -82,7 +82,7 @@ function App() {
   return (
     <>
       <header>
-        <h1>Sendpass.com</h1>
+        <h1>Send Passwords</h1>
         <p>Send your passwords and sensitive data - safely and secure!</p>
       </header>
       <main>
@@ -137,7 +137,7 @@ function App() {
           for a safer web.
         </p>
 
-        <a href="https://github.com/garritfra/sendpass">Source code</a>
+        <a href="https://github.com/garritfra/sendpasswords.net">Source code</a>
 
         <p>
           👻&nbsp;Proud member of{" "}

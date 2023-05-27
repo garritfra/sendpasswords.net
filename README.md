@@ -1,5 +1,5 @@
-# sendpass
+# sendpasswords.net
 
 Send and receive sensitive data - safely and secure!
 
-https://garritfra.github.io/sendpass/
+https://sendpasswords.net/
