@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import * as openpgp from "openpgp";
 import "simpledotcss/simple.min.css";
 import "./App.css";
+import Faq from "./components/Faq";
+import Instructions from "./components/Instructions";
 
 function App() {
   const [key, setKey] = useState<openpgp.SerializedKeyPair<string> | null>(
@@ -123,16 +125,8 @@ function App() {
           <label htmlFor="output">Output:</label>
           <textarea id="output" readOnly value={decryptOutput}></textarea>
         </div>
-        <div id="insructions">
-          <h2>Instructions</h2>
-          <ol>
-            <li>Ask your friend for their key</li>
-            <li>Enter the text you want to encrypt</li>
-            <li>
-              Copy the encrypted text. It is safe to share it as plain text!
-            </li>
-          </ol>
-        </div>
+        <Instructions />
+        <Faq />
       </main>
       <footer>
         <p>
