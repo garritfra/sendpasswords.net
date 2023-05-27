@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   const copyToClipboard = async (text: string) => {
-    if ("clipboard" in navigator) {
+    if ("clipboard" in navigator && navigator.clipboard !== undefined) {
       return await navigator.clipboard.writeText(text);
     } else {
       return document.execCommand("copy", true, text);
@@ -47,7 +47,9 @@ function App() {
 
   const onCopyEncryptedTextClicked = async () => {
     if (friendKey && key) {
-      const parsedFriendKey = await openpgp.readKey({ armoredKey: friendKey });
+      const parsedFriendKey = await openpgp.readKey({
+        armoredKey: friendKey.trim(),
+      });
       const encrypted = await openpgp.encrypt({
         message: await openpgp.createMessage({ text }),
         encryptionKeys: [parsedFriendKey],
