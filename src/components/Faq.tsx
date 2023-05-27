@@ -25,7 +25,9 @@ const Faq = () => {
 
         <p>
           Don't believe me? The source code for this tool is{" "}
-          <a href="https://github.com/garritfra/sendpasswords.net">publicly available</a>
+          <a href="https://github.com/garritfra/sendpasswords.net">
+            publicly available
+          </a>
           ! 🙂
         </p>
       </details>
@@ -44,12 +46,39 @@ const Faq = () => {
         </p>
       </details>
       <details>
-        <summary>I have a question. How can I get in touch?</summary>
+        <summary>How long is my key valid?</summary>
+
+        <p>
+          Your key is currently not stored anywhere. This means that everytime
+          you enter the page, a new key is generated. This might change in the
+          future though.
+        </p>
+      </details>
+      <details>
+        <summary>
+          I have a question or feedback. How can I get in touch?
+        </summary>
 
         <p>
           You can head over to my{" "}
           <a href="https://garrit.xyz/contact">personal website</a> to find ways
           to contact me.
+        </p>
+      </details>
+      <details>
+        <summary>I see an issue! Where do I report it?</summary>
+
+        <p>
+          If you run into problems or bugs, please head over to{" "}
+          <a href="https://github.com/garritfra/sendpasswords.net/issues">
+            our GitHub repo
+          </a>{" "}
+          and open an issue. Thanks for for help!!
+        </p>
+        <p>
+          If you don't have an account on GitHub and don't want to create one,
+          you're very welcome to contact me through my
+          <a href="https://garrit.xyz/contact">personal website</a>!
         </p>
       </details>
     </div>
