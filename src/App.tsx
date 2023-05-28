@@ -84,9 +84,7 @@ function App() {
           <textarea
             id="friend-key"
             value={friendKey}
-            onChange={(e) => {
-              return setFriendKey(e.target.value);
-            }}
+            onChange={(e) => setFriendKey(e.target.value)}
           ></textarea>
           <label htmlFor="text">Text:</label>
           <textarea
