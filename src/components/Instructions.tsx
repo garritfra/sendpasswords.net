@@ -1,7 +1,7 @@
 const Instructions = () => {
   return (
     <div id="instructions">
-      <h2>Instructions</h2>
+      <h2>How does it work?</h2>
       <ol>
         <li>Ask your friend for their key</li>
         <li>Enter the text you want to encrypt</li>

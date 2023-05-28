@@ -33,7 +33,7 @@ const Faq = () => {
       </details>
 
       <details>
-        <summary>How does it work?</summary>
+        <summary>How does this work, exactly?</summary>
         <p>
           Our tool operates in a stateless manner, meaning it does not store any
           data on our servers. It is built on OpenPGP.js, a pure JavaScript
