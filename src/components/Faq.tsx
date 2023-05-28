@@ -34,7 +34,6 @@ const Faq = () => {
 
       <details>
         <summary>How does it work?</summary>
-
         <p>
           Our tool operates in a stateless manner, meaning it does not store any
           data on our servers. It is built on OpenPGP.js, a pure JavaScript
@@ -44,14 +43,20 @@ const Faq = () => {
           recipients with the corresponding private key can decrypt and access
           the information.
         </p>
+        <p>
+          Your key consists of a public and a private part. The public key can
+          savely be shared with anyone. The private key is stored locally in
+          your browser and should never be exposed to anyone. If you suspect
+          that your key might have been exposed, you should regenerate it
+          manually.
+        </p>
       </details>
       <details>
         <summary>How long is my key valid?</summary>
-
         <p>
-          Your key is currently not stored anywhere. This means that everytime
-          you enter the page, a new key is generated. This might change in the
-          future though.
+          Your key is stored locally in your browser and currently valid
+          indefinetely. If you suspect that your key might have been exposed,
+          you should regenerate it manually.
         </p>
       </details>
       <details>
