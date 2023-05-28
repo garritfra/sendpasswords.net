@@ -78,6 +78,7 @@ function App() {
       </header>
       <main>
         <div id="encryption-section">
+          <Instructions />
           <h2>Send</h2>
           <label htmlFor="friend-key">Friend's Key:</label>
           <textarea
@@ -121,7 +122,6 @@ function App() {
           <label htmlFor="output">Output:</label>
           <textarea id="output" readOnly value={decryptOutput}></textarea>
         </div>
-        <Instructions />
         <Faq />
       </main>
       <footer>
