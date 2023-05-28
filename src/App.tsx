@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as openpgp from "openpgp";
 import "simpledotcss/simple.min.css";
 import "./App.css";
 import Faq from "./components/Faq";
 import Instructions from "./components/Instructions";
+import useKeypair from "./hooks/useKeypair";
 
 function App() {
-  const [key, setKey] = useState<openpgp.SerializedKeyPair<string> | null>(
-    null
-  );
   const [isKeyCopied, setIsKeyCopied] = useState(false);
+  const [isKeyRegenerated, setIsKeyRegenerated] = useState(false);
 
   const [text, setText] = useState<string>("");
   const [isTextCopied, setIsTextCopied] = useState(false);
@@ -19,16 +18,7 @@ function App() {
   const [decryptText, setDecryptText] = useState<string>("");
   const [decryptOutput, setDecryptOutput] = useState<string>("");
 
-  useEffect(() => {
-    openpgp
-      .generateKey({
-        userIDs: [{}],
-        rsaBits: 4096,
-      })
-      .then((pgpKey) => {
-        return setKey(pgpKey);
-      });
-  }, []);
+  const { key, generateKey } = useKeypair();
 
   const copyToClipboard = async (text: string) => {
     if ("clipboard" in navigator) {
@@ -40,9 +30,14 @@ function App() {
 
   const onCopyKeyButtonClicked = async () => {
     if (key) {
-      copyToClipboard(key.publicKey);
+      copyToClipboard(key.publicKey.armor());
     }
     setIsKeyCopied(true);
+  };
+
+  const onRegenerateKeyClicked = async () => {
+    generateKey();
+    setIsKeyRegenerated(true);
   };
 
   const onCopyEncryptedTextClicked = async () => {
@@ -67,14 +62,10 @@ function App() {
 
   const decrypt = async () => {
     if (decryptText && key) {
-      const parsedPrivateKey = await openpgp.readPrivateKey({
-        armoredKey: key.privateKey,
-      });
       const decrypted = await openpgp.decrypt({
         message: await openpgp.readMessage({ armoredMessage: decryptText }),
-        decryptionKeys: [parsedPrivateKey],
+        decryptionKeys: [key.privateKey],
       });
-      console.log(decrypted);
       setDecryptOutput(decrypted.data.toString());
     }
   };
@@ -110,9 +101,14 @@ function App() {
         <div id="decryption-section">
           <h2>Receive</h2>
           <div id="key-display">
-            <button id="copy-key-btn" onClick={onCopyKeyButtonClicked}>
-              {isKeyCopied ? "Copied!" : "Copy Your Key"}
-            </button>
+            <div className="spaced">
+              <button id="copy-key-btn" onClick={onCopyKeyButtonClicked}>
+                {isKeyCopied ? "Copied!" : "Copy Your Key"}
+              </button>
+              <button className="secondary" onClick={onRegenerateKeyClicked}>
+                {isKeyRegenerated ? "Regenerated!" : "Regenerate Your Key"}
+              </button>
+            </div>
           </div>
 
           <label htmlFor="encrypted-text">Encrypted Text:</label>

@@ -2,6 +2,12 @@ h2 {
   margin-top: 1rem;
 }
 
-.button-secondary {
-  background-color: var(--secondary);
+button.secondary {
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+.spaced {
+  display: flex;
+  gap: 1em;
 }
