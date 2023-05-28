@@ -119,8 +119,18 @@ function App() {
             onChange={onDecryptTextTextChanged}
             onKeyUp={onDecryptTextTextChanged}
           ></textarea>
-          <label htmlFor="output">Output:</label>
-          <textarea id="output" readOnly value={decryptOutput}></textarea>
+          <label
+            htmlFor="output"
+            style={decryptOutput ? undefined : { display: "none" }}
+          >
+            Output:
+          </label>
+          <textarea
+            id="output"
+            readOnly
+            value={decryptOutput}
+            style={decryptOutput ? undefined : { display: "none" }}
+          ></textarea>
         </div>
         <Faq />
       </main>
