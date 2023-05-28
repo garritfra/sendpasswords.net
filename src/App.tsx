@@ -80,7 +80,7 @@ function App() {
         <div id="encryption-section">
           <Instructions />
           <h2>Send</h2>
-          <label htmlFor="friend-key">Friend's Key:</label>
+          <label htmlFor="friend-key">Friend&aposs Key:</label>
           <textarea
             id="friend-key"
             value={friendKey}

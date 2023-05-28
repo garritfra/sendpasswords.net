@@ -24,7 +24,7 @@ const Faq = () => {
         </p>
 
         <p>
-          Don't believe me? The source code for this tool is{" "}
+          Don&apost believe me? The source code for this tool is{" "}
           <a href="https://github.com/garritfra/sendpasswords.net">
             publicly available
           </a>
@@ -81,8 +81,8 @@ const Faq = () => {
           and open an issue. Thanks for for help!!
         </p>
         <p>
-          If you don't have an account on GitHub and don't want to create one,
-          you're very welcome to contact me through my
+          If you don&apost have an account on GitHub and don&apost want to create one,
+          you&aposre very welcome to contact me through my
           <a href="https://garrit.xyz/contact">personal website</a>!
         </p>
       </details>

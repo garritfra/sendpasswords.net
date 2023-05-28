@@ -18,16 +18,18 @@ export default function usePrivateKey() {
 
   useEffect(() => {
     if (armoredKey !== null) {
-      openpgp.readPrivateKey({ armoredKey }).then((privateKey) => setKey({
-        publicKey: privateKey.toPublic(),
-        privateKey,
-      }));
+      openpgp.readPrivateKey({ armoredKey }).then((privateKey) =>
+        setKey({
+          publicKey: privateKey.toPublic(),
+          privateKey,
+        })
+      );
     }
   }, [armoredKey]);
 
   useEffect(() => {
     if (key !== null) {
-        setArmoredKey(key.privateKey.armor());
+      setArmoredKey(key.privateKey.armor());
     }
   }, [key]);
 
