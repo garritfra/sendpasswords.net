@@ -7,9 +7,12 @@ const Send = () => {
   const [output, setOutput] = useState<string>("");
 
   const [isTextCopied, setIsTextCopied] = useState(false);
+  const [isShareLinkCopied, setIsShareLinkCopied] = useState(false);
 
   const [friendKey, setFriendKey] = useState<string>("");
   const { copy } = useClipboard();
+
+  const receiveLink = `${window.location.href}receive`;
 
   useEffect(() => {
     (async () => {
@@ -34,10 +37,40 @@ const Send = () => {
     setIsTextCopied(true);
   };
 
+  const onShareLinkClicked = async () => {
+    if ("canShare" in navigator && navigator.canShare()) {
+      await navigator.share({
+        title: "Let me share my password with you",
+        text: "Open this link and follow the instructions",
+        url: receiveLink,
+      });
+    } else {
+      const linkText = `Let me share a password with you!
+
+Open this link and follow the instructions:
+${receiveLink}
+    `;
+      copy(linkText);
+    }
+    setIsShareLinkCopied(true);
+  };
+
   return (
     <div id="encryption-section">
       <h2>Send</h2>
-      <label htmlFor="friend-key">1. Ask your friend for their key:</label>
+      <label htmlFor="share-link-btn">
+        1: Tell your friend to visit <a href={receiveLink}>{receiveLink}</a>.
+      </label>
+      <button id="share-link-btn" onClick={onShareLinkClicked}>
+        {"canshare" in navigator && navigator.canShare()
+          ? "Share Link"
+          : isShareLinkCopied
+          ? "Copied to Clipboard!"
+          : "Copy Link to Clipboard"}
+      </button>
+      <label htmlFor="friend-key">
+        2. Paste the text your friend sent you below:
+      </label>
       <textarea
         id="friend-key"
         value={friendKey}
@@ -46,7 +79,7 @@ const Send = () => {
         }
         onChange={(e) => setFriendKey(e.target.value)}
       ></textarea>
-      <label htmlFor="text">2. Enter the text you want to encrypt:</label>
+      <label htmlFor="text">3. Enter the text you want to encrypt:</label>
       <textarea
         id="text"
         value={text}
@@ -55,7 +88,7 @@ const Send = () => {
       ></textarea>
       <div id="result" style={output ? undefined : { display: "none" }}>
         <label htmlFor="output">
-          3: Copy this encrypted text and send it to your friend:
+          4: Copy this encrypted text and send it to your friend:
         </label>
         <textarea id="output" value={output}></textarea>
         <button id="encrypt-btn" onClick={onCopyEncryptedTextClicked}>
