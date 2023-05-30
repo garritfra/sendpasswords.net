@@ -48,25 +48,27 @@ const Send = () => {
       <textarea
         id="friend-key"
         value={friendKey}
+        placeholder={
+          "-----BEGIN PGP PUBLIC KEY BLOCK-----\n...\n-----END PGP PUBLIC KEY BLOCK-----"
+        }
         onChange={(e) => setFriendKey(e.target.value)}
       ></textarea>
       <label htmlFor="text">2. Enter the text you want to encrypt:</label>
       <textarea
         id="text"
         value={text}
-        onChange={(e) => setText(e.target.value.trim())}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="mysecretpassword"
       ></textarea>
-      <label htmlFor="output">
-        3: Copy this encrypted text and send it to your friend:
-      </label>
-      <textarea
-        id="output"
-        value={output}
-        style={output ? undefined : { display: "none" }}
-      ></textarea>
-      <button id="encrypt-btn" onClick={onCopyEncryptedTextClicked}>
-        {isTextCopied ? "Copied to clipboard!" : "Copy Encrypted Text"}
-      </button>
+      <div id="result" style={output ? undefined : { display: "none" }}>
+        <label htmlFor="output">
+          3: Copy this encrypted text and send it to your friend:
+        </label>
+        <textarea id="output" value={output}></textarea>
+        <button id="encrypt-btn" onClick={onCopyEncryptedTextClicked}>
+          {isTextCopied ? "Copied to clipboard!" : "Copy to Clipboard"}
+        </button>
+      </div>
     </div>
   );
 };

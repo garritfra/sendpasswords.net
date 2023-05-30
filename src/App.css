@@ -2,6 +2,10 @@ h2 {
   margin-top: 1rem;
 }
 
+textarea {
+  resize: vertical;
+}
+
 button.secondary {
   background-color: transparent;
   border: 1px solid var(--accent);

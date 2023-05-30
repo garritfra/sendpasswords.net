@@ -74,6 +74,9 @@ const Receive = () => {
         value={decryptText}
         onChange={onDecryptTextTextChanged}
         onKeyUp={onDecryptTextTextChanged}
+        placeholder={
+          "-----BEGIN PGP MESSAGE-----\n...\n-----END PGP MESSAGE-----"
+        }
       ></textarea>
       <label
         htmlFor="output"
