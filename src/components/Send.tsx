@@ -57,7 +57,6 @@ ${receiveLink}
 
   return (
     <div id="encryption-section">
-      <h2>Send</h2>
       <label htmlFor="share-link-btn">
         1: Tell your friend to visit <a href={receiveLink}>{receiveLink}</a>.
       </label>

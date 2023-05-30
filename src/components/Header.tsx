@@ -1,7 +1,9 @@
 const Header = () => {
   return (
     <header>
-      <h1>Send Passwords</h1>
+      <a href="/">
+        <h1>🔐 Send Passwords 🔐</h1>
+      </a>
       <p>Send your passwords and sensitive data - safely and secure!</p>
     </header>
   );
