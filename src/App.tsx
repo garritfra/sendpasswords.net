@@ -1,20 +1,27 @@
 import "simpledotcss/simple.min.css";
 import "./App.css";
-import Faq from "./components/Faq";
-import Send from "./components/Send";
-import Receive from "./components/Receive";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import HomePage from "./pages/Home";
+import ReceivePage from "./pages/Receive";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <HomePage />,
+    },
+    {
+      path: "/receive",
+      element: <ReceivePage />,
+    },
+  ]);
   return (
     <>
       <Header />
-      <main>
-        <Send />
-        <Receive />
-        <Faq />
-      </main>
+      <RouterProvider router={router} />
       <Footer />
     </>
   );
