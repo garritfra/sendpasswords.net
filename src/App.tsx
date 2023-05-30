@@ -5,21 +5,18 @@ import "./App.css";
 import Faq from "./components/Faq";
 import Instructions from "./components/Instructions";
 import useKeypair from "./hooks/useKeypair";
+import Send from "./components/Send";
 
 function App() {
   const [isKeyCopied, setIsKeyCopied] = useState(false);
   const [isKeyRegenerated, setIsKeyRegenerated] = useState(false);
-
-  const [text, setText] = useState<string>("");
-  const [isTextCopied, setIsTextCopied] = useState(false);
-
-  const [friendKey, setFriendKey] = useState<string>("");
 
   const [decryptText, setDecryptText] = useState<string>("");
   const [decryptOutput, setDecryptOutput] = useState<string>("");
 
   const { key, generateKey } = useKeypair();
 
+  // TODO: Refactor into hook
   const copyToClipboard = async (text: string) => {
     if ("clipboard" in navigator) {
       return await navigator.clipboard.writeText(text);
@@ -38,19 +35,6 @@ function App() {
   const onRegenerateKeyClicked = async () => {
     generateKey();
     setIsKeyRegenerated(true);
-  };
-
-  const onCopyEncryptedTextClicked = async () => {
-    if (friendKey && key) {
-      const parsedFriendKey = await openpgp.readKey({ armoredKey: friendKey });
-      const encrypted = await openpgp.encrypt({
-        message: await openpgp.createMessage({ text }),
-        encryptionKeys: [parsedFriendKey],
-        format: "armored",
-      });
-      copyToClipboard(encrypted.toString());
-    }
-    setIsTextCopied(true);
   };
 
   // TODO: Use proper function type
@@ -77,26 +61,8 @@ function App() {
         <p>Send your passwords and sensitive data - safely and secure!</p>
       </header>
       <main>
-        <div id="encryption-section">
-          <Instructions />
-          <h2>Send</h2>
-          <label htmlFor="friend-key">Friend's Key:</label>
-          <textarea
-            id="friend-key"
-            value={friendKey}
-            onChange={(e) => setFriendKey(e.target.value)}
-          ></textarea>
-          <label htmlFor="text">Text:</label>
-          <textarea
-            id="text"
-            value={text}
-            onChange={(e) => setText(e.target.value.trim())}
-          ></textarea>
-          <button id="encrypt-btn" onClick={onCopyEncryptedTextClicked}>
-            {isTextCopied ? "Copied to clipboard!" : "Copy Encrypted Text"}
-          </button>
-        </div>
-
+        <Instructions />
+        <Send />
         <div id="decryption-section">
           <h2>Receive</h2>
           <div id="key-display">
