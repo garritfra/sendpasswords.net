@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as openpgp from "openpgp";
+import useClipboard from "../hooks/useClipboard";
 
 const Send = () => {
   const [text, setText] = useState<string>("");
@@ -8,6 +9,7 @@ const Send = () => {
   const [isTextCopied, setIsTextCopied] = useState(false);
 
   const [friendKey, setFriendKey] = useState<string>("");
+  const { copy } = useClipboard();
 
   useEffect(() => {
     (async () => {
@@ -27,17 +29,8 @@ const Send = () => {
     })();
   }, [text, friendKey]);
 
-  // TODO: Refactor into hook
-  const copyToClipboard = async (text: string) => {
-    if ("clipboard" in navigator) {
-      return await navigator.clipboard.writeText(text);
-    } else {
-      return document.execCommand("copy", true, text);
-    }
-  };
-
   const onCopyEncryptedTextClicked = async () => {
-    copyToClipboard(output);
+    copy(output);
     setIsTextCopied(true);
   };
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as openpgp from "openpgp";
 import useKeypair from "../hooks/useKeypair";
+import useClipboard from "../hooks/useClipboard";
 
 const Receive = () => {
   const [isKeyCopied, setIsKeyCopied] = useState(false);
@@ -10,19 +11,11 @@ const Receive = () => {
   const [decryptOutput, setDecryptOutput] = useState<string>("");
 
   const { key, generateKey } = useKeypair();
-
-  // TODO: Refactor into hook
-  const copyToClipboard = async (text: string) => {
-    if ("clipboard" in navigator) {
-      return await navigator.clipboard.writeText(text);
-    } else {
-      return document.execCommand("copy", true, text);
-    }
-  };
+  const { copy } = useClipboard();
 
   const onCopyKeyButtonClicked = async () => {
     if (key) {
-      copyToClipboard(key.publicKey.armor());
+      copy(key.publicKey.armor());
     }
     setIsKeyCopied(true);
   };
