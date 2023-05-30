@@ -35,13 +35,13 @@ const Send = () => {
   return (
     <div id="encryption-section">
       <h2>Send</h2>
-      <label htmlFor="friend-key">Friend's Key:</label>
+      <label htmlFor="friend-key">1. Ask your friend for their key:</label>
       <textarea
         id="friend-key"
         value={friendKey}
         onChange={(e) => setFriendKey(e.target.value)}
       ></textarea>
-      <label htmlFor="text">Text:</label>
+      <label htmlFor="text">2. Enter the text you want to encrypt:</label>
       <textarea
         id="text"
         value={text}

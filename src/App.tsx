@@ -3,7 +3,6 @@ import * as openpgp from "openpgp";
 import "simpledotcss/simple.min.css";
 import "./App.css";
 import Faq from "./components/Faq";
-import Instructions from "./components/Instructions";
 import useKeypair from "./hooks/useKeypair";
 import Send from "./components/Send";
 
@@ -61,12 +60,14 @@ function App() {
         <p>Send your passwords and sensitive data - safely and secure!</p>
       </header>
       <main>
-        <Instructions />
         <Send />
         <div id="decryption-section">
           <h2>Receive</h2>
           <div id="key-display">
-            <div className="spaced">
+            <label htmlFor="key-copy">
+              1. Copy your key and send it to your friend:
+            </label>
+            <div className="spaced" id="key-copy">
               <button id="copy-key-btn" onClick={onCopyKeyButtonClicked}>
                 {isKeyCopied ? "Copied!" : "Copy Your Key"}
               </button>
@@ -76,7 +77,9 @@ function App() {
             </div>
           </div>
 
-          <label htmlFor="encrypted-text">Encrypted Text:</label>
+          <label htmlFor="encrypted-text">
+            2. Paste the text your friend sent you back:
+          </label>
           <textarea
             id="encrypted-text"
             value={decryptText}
