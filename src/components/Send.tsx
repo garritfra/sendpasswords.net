@@ -1,14 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as openpgp from "openpgp";
-import useKeypair from "../hooks/useKeypair";
 
 const Send = () => {
   const [text, setText] = useState<string>("");
+  const [output, setOutput] = useState<string>("");
+
   const [isTextCopied, setIsTextCopied] = useState(false);
 
   const [friendKey, setFriendKey] = useState<string>("");
 
-  const { key } = useKeypair();
+  useEffect(() => {
+    (async () => {
+      if (friendKey && text) {
+        const parsedFriendKey = await openpgp.readKey({
+          armoredKey: friendKey,
+        });
+        const encrypted = await openpgp.encrypt({
+          message: await openpgp.createMessage({ text }),
+          encryptionKeys: [parsedFriendKey],
+          format: "armored",
+        });
+        setOutput(encrypted.toString());
+      } else {
+        setOutput("");
+      }
+    })();
+  }, [text, friendKey]);
 
   // TODO: Refactor into hook
   const copyToClipboard = async (text: string) => {
@@ -20,15 +37,7 @@ const Send = () => {
   };
 
   const onCopyEncryptedTextClicked = async () => {
-    if (friendKey && key) {
-      const parsedFriendKey = await openpgp.readKey({ armoredKey: friendKey });
-      const encrypted = await openpgp.encrypt({
-        message: await openpgp.createMessage({ text }),
-        encryptionKeys: [parsedFriendKey],
-        format: "armored",
-      });
-      copyToClipboard(encrypted.toString());
-    }
+    copyToClipboard(output);
     setIsTextCopied(true);
   };
 
@@ -46,6 +55,14 @@ const Send = () => {
         id="text"
         value={text}
         onChange={(e) => setText(e.target.value.trim())}
+      ></textarea>
+      <label htmlFor="output">
+        3: Copy this encrypted text and send it to your friend:
+      </label>
+      <textarea
+        id="output"
+        value={output}
+        style={output ? undefined : { display: "none" }}
       ></textarea>
       <button id="encrypt-btn" onClick={onCopyEncryptedTextClicked}>
         {isTextCopied ? "Copied to clipboard!" : "Copy Encrypted Text"}
