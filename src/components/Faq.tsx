@@ -81,8 +81,8 @@ const Faq = () => {
           and open an issue. Thanks for for help!!
         </p>
         <p>
-          If you don'n account on GitHub and don&apost w'o create one,
-          you're very welcome to contact me through my
+          If you don't have an account on GitHub and don't want to create one,
+          you're very welcome to contact me through my{" "}
           <a href="https://garrit.xyz/contact">personal website</a>!
         </p>
       </details>
