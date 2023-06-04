@@ -1,7 +1,11 @@
+import { useTranslation } from "react-i18next";
+import { TranslationKey } from "../i18n/keys";
+
 const Faq = () => {
+  const { t } = useTranslation();
   return (
     <div id="faq">
-      <h2>Frequently Asked Questions</h2>
+      <h2>{t(TranslationKey.FAQTitle)}</h2>
 
       <details>
         <summary>What is this tool?</summary>

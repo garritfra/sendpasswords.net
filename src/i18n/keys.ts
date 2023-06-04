@@ -1,8 +1,9 @@
 export type Translation = Record<TranslationKey, string>;
 
 export enum TranslationKey {
-  AppTitle = "AppTitle",
   AppSubTitle = "AppSubTitle",
+  AppTitle = "AppTitle",
+  FAQTitle = "FAQ",
   Send = "Send",
   SendInstructions1 = "SendInstructions1",
   SendInstructions2 = "SendInstructions2",
