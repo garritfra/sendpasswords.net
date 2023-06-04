@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import * as openpgp from "openpgp";
 import useClipboard from "../hooks/useClipboard";
+import { useTranslation } from "react-i18next";
+import { TranslationKey } from "../i18n/keys";
 
 const Send = () => {
+  const { t } = useTranslation();
+
   const [text, setText] = useState<string>("");
   const [output, setOutput] = useState<string>("");
 
@@ -58,7 +62,8 @@ ${receiveLink}
   return (
     <div id="encryption-section">
       <label htmlFor="share-link-btn">
-        1: Tell your friend to visit <a href={receiveLink}>{receiveLink}</a>.
+        {t(TranslationKey.SendInstructions1)}{" "}
+        <a href={receiveLink}>{receiveLink}</a>.
       </label>
       <button id="share-link-btn" onClick={onShareLinkClicked}>
         {"canshare" in navigator && navigator.canShare()
@@ -67,9 +72,7 @@ ${receiveLink}
           ? "Copied to Clipboard!"
           : "Copy Link to Clipboard"}
       </button>
-      <label htmlFor="friend-key">
-        2. Paste the text your friend sent you below:
-      </label>
+      <label htmlFor="friend-key">{t(TranslationKey.SendInstructions2)}</label>
       <textarea
         id="friend-key"
         value={friendKey}
@@ -78,7 +81,7 @@ ${receiveLink}
         }
         onChange={(e) => setFriendKey(e.target.value)}
       ></textarea>
-      <label htmlFor="text">3. Enter the text you want to encrypt:</label>
+      <label htmlFor="text">{t(TranslationKey.SendInstructions3)}</label>
       <textarea
         id="text"
         value={text}
