@@ -16,7 +16,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.1.2",
-    "react-router-dom": "^6.14.2",
+    "react-router-dom": "^6.15.0",
     "simpledotcss": "^2.2.1",
     "use-local-storage": "^3.0.0"
   },
