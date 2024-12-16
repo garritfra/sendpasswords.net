@@ -66,19 +66,17 @@ ${receiveLink}
         <a href={receiveLink}>{receiveLink}</a>.
       </label>
       <button id="share-link-btn" onClick={onShareLinkClicked}>
-        {"canshare" in navigator && navigator.canShare()
-          ? "Share Link"
+        {"canShare" in navigator && navigator.canShare()
+          ? t(TranslationKey.ShareLinkButton)
           : isShareLinkCopied
-          ? "Copied to Clipboard!"
-          : "Copy Link to Clipboard"}
+          ? t(TranslationKey.ShareLinkButtonCopied)
+          : t(TranslationKey.ShareLinkButton)}
       </button>
       <label htmlFor="friend-key">{t(TranslationKey.SendInstructions2)}</label>
       <textarea
         id="friend-key"
         value={friendKey}
-        placeholder={
-          "-----BEGIN PGP PUBLIC KEY BLOCK-----\n...\n-----END PGP PUBLIC KEY BLOCK-----"
-        }
+        placeholder={t(TranslationKey.UnlockCodePlaceholder)}
         onChange={(e) => setFriendKey(e.target.value)}
       ></textarea>
       <label htmlFor="text">{t(TranslationKey.SendInstructions3)}</label>
@@ -86,15 +84,20 @@ ${receiveLink}
         id="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="mysecretpassword"
+        placeholder={t(TranslationKey.SecretMessagePlaceholder)}
       ></textarea>
       <div id="result" style={output ? undefined : { display: "none" }}>
-        <label htmlFor="output">
-          4: Copy this encrypted text and send it to your friend:
-        </label>
-        <textarea id="output" value={output}></textarea>
+        <label htmlFor="output">{t(TranslationKey.SendInstructions4)}</label>
+        <textarea 
+          id="output" 
+          value={output}
+          readOnly
+          aria-label={t(TranslationKey.ProtectedMessageLabel)}
+        ></textarea>
         <button id="encrypt-btn" onClick={onCopyEncryptedTextClicked}>
-          {isTextCopied ? "Copied to clipboard!" : "Copy to Clipboard"}
+          {isTextCopied 
+            ? t(TranslationKey.CopyProtectedMessageCopied) 
+            : t(TranslationKey.CopyProtectedMessage)}
         </button>
       </div>
     </div>

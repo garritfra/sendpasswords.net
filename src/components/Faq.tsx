@@ -8,86 +8,92 @@ const Faq = () => {
       <h2>{t(TranslationKey.FAQTitle)}</h2>
 
       <details>
-        <summary>What is this tool?</summary>
+        <summary>What is this website for?</summary>
         <p>
-          This tool is a secure way to share passwords and other sensitive data
-          with your friends. It ensures that your data remains protected during
-          transmission and only accessible to the intended recipients.
+          This is a safe way to share passwords with friends and family - like passing a note
+          that only they can read. It's perfect when you need to share login details
+          or other private information with someone you trust.
         </p>
       </details>
+
       <details>
-        <summary>Why should I use this?</summary>
-
+        <summary>Is this safe to use?</summary>
         <p>
-          Unlike other password sharing websites that store your secret data and
-          generate public links, this tool prioritizes your privacy and
-          security. It runs entirely inside your browser, and no input is ever
-          send to our servers. By using this tool, you eliminate the risk of
-          your data being exposed or stored and potentially sold to third
-          parties.
+          Yes! This tool is designed with your privacy in mind. When you share a password:
         </p>
-
+        <ul>
+          <li>Everything happens right here in your browser - we never see your passwords</li>
+          <li>Only the person you choose can read your message</li>
+          <li>We don't store anything - your message disappears once sent</li>
+        </ul>
         <p>
-          Don't believe me? The source code for this tool is{" "}
+          Want to verify this? Our code is{" "}
           <a href="https://github.com/garritfra/sendpasswords.net">
-            publicly available
+            open for anyone to check
           </a>
           ! 🙂
         </p>
       </details>
 
       <details>
-        <summary>How does this work, exactly?</summary>
+        <summary>How do I use this?</summary>
         <p>
-          Our tool operates in a stateless manner, meaning it does not store any
-          data on our servers. It is built on OpenPGP.js, a pure JavaScript
-          implementation of PGP (Pretty Good Privacy), a widely recognized
-          encryption standard. When you share sensitive data, it is encrypted
-          locally on your device using PGP cryptography, and only the intended
-          recipients with the corresponding private key can decrypt and access
-          the information.
+          It's as simple as sharing a secret note:
         </p>
-        <p>
-          Your key consists of a public and a private part. The public key can
-          savely be shared with anyone. The private key is stored locally in
-          your browser and should never be exposed to anyone. If you suspect
-          that your key might have been exposed, you should regenerate it
-          manually.
-        </p>
+        <ol>
+          <li>Share the website link with your friend</li>
+          <li>Your friend will create their personal unlock code and send it to you</li>
+          <li>Type in your password or secret message</li>
+          <li>Share the protected message with your friend - only they can read it!</li>
+        </ol>
       </details>
-      <details>
-        <summary>How long is my key valid?</summary>
-        <p>
-          Your key is stored locally in your browser and currently valid
-          indefinetely. If you suspect that your key might have been exposed,
-          you should regenerate it manually.
-        </p>
-      </details>
-      <details>
-        <summary>
-          I have a question or feedback. How can I get in touch?
-        </summary>
 
+      <details>
+        <summary>What's an unlock code?</summary>
         <p>
-          You can head over to my{" "}
-          <a href="https://garrit.xyz/contact">personal website</a> to find ways
-          to contact me.
+          An unlock code is like a special key that only your friend has. It comes in two parts:
+        </p>
+        <ul>
+          <li>A public part they share with you (safe to share)</li>
+          <li>A private part they keep secret (never share this!)</li>
+        </ul>
+        <p>
+          When you get a new unlock code from your friend, your message will be automatically
+          protected so only they can read it.
         </p>
       </details>
-      <details>
-        <summary>I see an issue! Where do I report it?</summary>
 
+      <details>
+        <summary>How long can I use this?</summary>
         <p>
-          If you run into problems or bugs, please head over to{" "}
+          Your unlock codes are saved in your browser and work for as long as you need them.
+          If you think someone else might have gotten access to your codes, you should
+          create new ones to stay safe.
+        </p>
+      </details>
+
+      <details className="technical-details">
+        <summary>I'm curious - how does this work technically?</summary>
+        <p>
+          For the technically curious: We use OpenPGP.js, which is a JavaScript implementation
+          of PGP (Pretty Good Privacy) encryption. All encryption happens locally in your
+          browser - we operate completely stateless, meaning no data touches our servers.
+        </p>
+        <p>
+          The public/private keypair is stored in your browser's local storage. If you
+          suspect your private key might have been compromised, you should generate a new
+          keypair immediately.
+        </p>
+      </details>
+
+      <details>
+        <summary>Need help or found an issue?</summary>
+        <p>
+          You can contact me through my{" "}
+          <a href="https://garrit.xyz/contact">website</a> or report issues on{" "}
           <a href="https://github.com/garritfra/sendpasswords.net/issues">
-            our GitHub repo
-          </a>{" "}
-          and open an issue. Thanks for for help!!
-        </p>
-        <p>
-          If you don't have an account on GitHub and don't want to create one,
-          you're very welcome to contact me through my{" "}
-          <a href="https://garrit.xyz/contact">personal website</a>!
+            GitHub
+          </a>.
         </p>
       </details>
     </div>
