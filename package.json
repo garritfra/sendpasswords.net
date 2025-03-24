@@ -17,7 +17,7 @@
     "react-dom": "^19.0.0",
     "react-i18next": "^15.4.1",
     "react-router-dom": "^7.3.0",
-    "simpledotcss": "^2.3.4",
+    "simpledotcss": "^2.3.5",
     "use-local-storage": "^3.0.0"
   },
   "devDependencies": {
