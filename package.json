@@ -11,7 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "i18next": "^25.3.6",
+    "i18next": "^25.5.2",
     "openpgp": "^6.1.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -21,7 +21,7 @@
     "use-local-storage": "^3.0.0"
   },
   "devDependencies": {
-    "@types/react": "^19.1.10",
+    "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.7",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
