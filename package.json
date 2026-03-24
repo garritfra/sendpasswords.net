@@ -11,7 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "i18next": "^25.7.3",
+    "i18next": "^25.10.5",
     "openpgp": "^6.1.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
